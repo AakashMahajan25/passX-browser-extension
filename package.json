@@ -3,13 +3,14 @@
   "displayName": "Pass x plasmo",
   "version": "0.0.1",
   "description": "A basic Plasmo extension.",
-  "author": "Plasmo Corp. <foss@plasmo.com>",
+  "author": "Aakash Mahajan <me@aakashmahajan.com>",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
     "package": "plasmo package"
   },
   "dependencies": {
+    "@clerk/chrome-extension": "^2.1.7",
     "plasmo": "0.89.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -26,8 +27,15 @@
     "typescript": "5.3.3"
   },
   "manifest": {
+    "key": "$CRX_PUBLIC_KEY",
+    "permissions": [
+      "cookies",
+      "storage"
+    ],
     "host_permissions": [
-      "https://*/*"
+      "https://*/*",
+      "http://localhost/*",
+      "$CLERK_FRONTEND_API/*"
     ]
   }
 }
