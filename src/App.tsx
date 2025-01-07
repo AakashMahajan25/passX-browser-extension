@@ -1,15 +1,23 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  // const [count, setCount] = useState(0) 
+  const changeColorOnClick = async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id! },
+      func: () => {
+        document.body.style.backgroundColor = 'green';
+      }
+    });
+  }
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
+        <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
@@ -18,8 +26,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => changeColorOnClick()}>
+         Change Color
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
